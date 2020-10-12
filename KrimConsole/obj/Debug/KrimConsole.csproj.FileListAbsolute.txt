@@ -1,0 +1,13 @@
+F:\Projects\Krim\KrimConsole\obj\Debug\KrimConsole.csproj.CoreCompileInputs.cache
+F:\Projects\Krim\KrimConsole\bin\Debug\KrimConsole.exe.config
+F:\Projects\Krim\KrimConsole\bin\Debug\KrimConsole.exe
+F:\Projects\Krim\KrimConsole\bin\Debug\KrimConsole.pdb
+F:\Projects\Krim\KrimConsole\bin\Debug\KrimLibrary.dll
+F:\Projects\Krim\KrimConsole\bin\Debug\KrimWPF.exe
+F:\Projects\Krim\KrimConsole\bin\Debug\KrimLibrary.pdb
+F:\Projects\Krim\KrimConsole\bin\Debug\KrimWPF.pdb
+F:\Projects\Krim\KrimConsole\bin\Debug\KrimWPF.exe.config
+F:\Projects\Krim\KrimConsole\obj\Debug\KrimConsole.csprojAssemblyReference.cache
+F:\Projects\Krim\KrimConsole\obj\Debug\KrimConsole.csproj.CopyComplete
+F:\Projects\Krim\KrimConsole\obj\Debug\KrimConsole.exe
+F:\Projects\Krim\KrimConsole\obj\Debug\KrimConsole.pdb

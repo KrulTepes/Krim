@@ -1,0 +1,50 @@
+﻿<Window x:Class="KrimWPF.Views.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KrimWPF.Views"
+        mc:Ignorable="d"
+        Title="Krim" Height="827" Width="770" ResizeMode="NoResize" KeyDown="Window_KeyDown">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <TextBlock Text="Moves: "
+                           FontSize="28"/>
+                <TextBlock Text="{Binding CountMoves}"
+                           FontSize="28"/>
+            </StackPanel>
+            <ScrollViewer Background="#FF2C2C2C" Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="FieldUGItemControl" 
+                          ItemsSource = "{Binding TilesCollection}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="{Binding FieldRows}" 
+                                     Columns="{Binding FieldColumns}"
+                                     Width="{Binding FieldWidth}"
+                                     Height="{Binding FieldHeight}"
+                                     MinWidth="750"
+                                     MinHeight="750"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+        <Grid Background="#FF1D1D1D"
+              Visibility="{Binding MenuVisibility}">
+            <Button Width="300" Height="50" 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="Start"
+                    FontSize="28"
+                    Command="{Binding StartCommand}"/>
+        </Grid>
+    </Grid>
+</Window>
