@@ -4,6 +4,8 @@
     {
         Passable,
         Impassable,
+        Relocatable,
+        //Handpikebable,
         Undefind
     }
 }

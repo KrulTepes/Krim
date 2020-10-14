@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using KrimLibrary.Core.Objects;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Security.Cryptography;
 
 namespace KrimLibrary.Core
 {
@@ -30,9 +30,6 @@ namespace KrimLibrary.Core
             return null;
         }
 
-        /// <summary>
-        /// Обновляет тайлы по данным существующего Map
-        /// </summary>
         private void UpdateTiles()
         {
             bool isFirst = false;
@@ -52,12 +49,31 @@ namespace KrimLibrary.Core
                     if (!isFirst)
                     {
                         if (Tiles[_map.Width * y + x].TileType != DefineTileType(_map.CellList[y][x]))
-                            Tiles[_map.Width * y + x] = new Tile(x, y, DefineTileType(_map.CellList[y][x]));
+                            Tiles[_map.Width * y + x] = DefineTile(x, y, _map.CellList[y][x]);
                     }
                     else
-                        Tiles.Add(new Tile(x, y, DefineTileType(_map.CellList[y][x])));
+                        Tiles.Add(DefineTile(x, y, _map.CellList[y][x]));
                 }
             }
+        }
+
+        private Tile DefineTile(int x, int y, char cell)
+        {
+            switch (cell)
+            {
+                case '.':
+                    return new Floor(x, y);
+                case 'X':
+                    return new Wall(x, y);
+                case 'K':
+                    return new Box(x, y);
+                case 'S':
+                    return new Floor(x, y);
+                case 'Q':
+                    return new Exit(x, y);
+            }
+
+            return new Wall(x, y);
         }
 
         private TileType DefineTileType(char cell)
@@ -68,13 +84,15 @@ namespace KrimLibrary.Core
                     return TileType.Floor;
                 case 'X':
                     return TileType.Wall;
+                case 'K':
+                    return TileType.Box;
                 case 'S':
                     return TileType.Floor;
                 case 'Q':
                     return TileType.Exit;
             }
 
-            return TileType.UNDEFIND;
+            return TileType.Wall;
         }
     }
 }

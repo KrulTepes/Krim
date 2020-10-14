@@ -51,6 +51,12 @@
     <Compile Include="Core\Collisions\ICollision.cs" />
     <Compile Include="Core\MoveType.cs" />
     <Compile Include="Core\Entities\Entity.cs" />
+    <Compile Include="Core\Objects\Exit.cs" />
+    <Compile Include="Core\Objects\Box.cs" />
+    <Compile Include="Core\Objects\Floor.cs" />
+    <Compile Include="Core\Objects\Tile.cs" />
+    <Compile Include="Core\Objects\Wall.cs" />
+    <Compile Include="Core\SwapTiles.cs" />
     <Compile Include="IGamePlatform.cs" />
     <Compile Include="Core\Level.cs" />
     <Compile Include="Logger.cs" />
@@ -58,8 +64,7 @@
     <Compile Include="Core\Entities\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource\Resources.cs" />
-    <Compile Include="Core\Tile.cs" />
-    <Compile Include="Core\TileType.cs" />
+    <Compile Include="Core\Objects\TileType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

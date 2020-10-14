@@ -1,4 +1,5 @@
 ﻿using KrimLibrary.Core.Collisions;
+using KrimLibrary.Core.Objects;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -21,6 +22,62 @@ namespace KrimLibrary.Core.Entities
             tileType = TileType.Player;
         }
 
+        public override bool Move(MoveType moveType)
+        {
+            List<Collision> nearCollisions = GetNearCollisions();
+            Point movement;
+            switch (moveType)
+            {
+                // ось инвертирована по оси Y
+                case MoveType.Up:
+                    movement = new Point(0, -1);
+                    break;
+                case MoveType.Down:
+                    movement = new Point(0, 1);
+                    break;
+                case MoveType.Left:
+                    movement = new Point(-1, 0);
+                    break;
+                case MoveType.Right:
+                    movement = new Point(1, 0);
+                    break;
+                default:
+                    movement = new Point();
+                    break;
+            }
+
+            Point tempPosition = new Point(
+                position.X + movement.X,
+                position.Y + movement.Y);
+
+            foreach (Collision collision in nearCollisions)
+            {
+                if (collision.Object is Tile)
+                {
+                    Tile tile = (Tile)collision.Object;
+                    if (tile.Position.X == tempPosition.X &&
+                        tile.Position.Y == tempPosition.Y)
+                    {
+                        if (collision.Object is Box)
+                        {
+                            if (!((Box)tile).TryMove(moveType))
+                                return false;
+
+                            break;
+                        }
+
+                        if (tile.CollisionType == CollisionType.Impassable)
+                            return false;
+
+                        break;
+                    }
+                }
+            }
+
+            position = tempPosition;
+            return true;
+        }
+
         public override void NearCollision(List<Collision> collisions)
         {
 
@@ -28,13 +85,9 @@ namespace KrimLibrary.Core.Entities
 
         public override void OnCollision(Collision collission)
         {
-            if (collission.Object is Tile)
+            if (collission.Object is Exit)
             {
-                Tile tile = (Tile)collission.Object;
-                if (tile.TileType == TileType.Exit)
-                {
-                    _isEnd = true;
-                }
+                _isEnd = true;
             }
         }
 

@@ -1,29 +1,19 @@
 ﻿using KrimLibrary.Core.Collisions;
-using KrimLibrary.Core.Objects;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Dynamic;
 
-namespace KrimLibrary.Core.Entities
+namespace KrimLibrary.Core.Objects
 {
-    public abstract class Entity : ICollision
+    public class Box : Tile
     {
-        protected TileType tileType;
-        protected Point position;
-        protected CollisionType collisionType;
-
-        public abstract object Owner { get; }
-        public CollisionType CollisionType { get => collisionType; }
-        public Point Position { get => position; }
-
-        public Entity(Point position)
+        public Box(int x, int y)
         {
-            this.position = position;
+            Init(x, y, TileType.Box);
         }
 
-        public virtual bool Move(MoveType moveType)
+        public bool TryMove(MoveType moveType)
         {
-            List<Collision> nearCollisions = GetNearCollisions();
+            List<Collision> nearCollisions = CollisionManager.GetNearCollisions(this);
             Point movement;
             switch (moveType)
             {
@@ -46,8 +36,8 @@ namespace KrimLibrary.Core.Entities
             }
 
             Point tempPosition = new Point(
-                position.X + movement.X,
-                position.Y + movement.Y);
+                Position.X + movement.X,
+                Position.Y + movement.Y);
 
             foreach (Collision collision in nearCollisions)
             {
@@ -57,36 +47,17 @@ namespace KrimLibrary.Core.Entities
                     if (tile.Position.X == tempPosition.X &&
                         tile.Position.Y == tempPosition.Y)
                     {
-                        if (tile.CollisionType == CollisionType.Impassable) 
+                        if (tile.CollisionType == CollisionType.Impassable)
                             return false;
 
+                        SwapTiles.Swap(this, tile);
                         break;
                     }
                 }
             }
 
-            position = tempPosition;
+           _position = tempPosition;
             return true;
-        }
-
-        protected List<Collision> GetNearCollisions()
-        {
-            return CollisionManager.GetNearCollisions(this);
-        }
-
-        public void SetPosition(Point newPosition)
-        {
-            position = newPosition;
-        }
-
-        public virtual void NearCollision(List<Collision> collisions)
-        {
-
-        }
-
-        public virtual void OnCollision(Collision collission)
-        {
-
         }
     }
 }

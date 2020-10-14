@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace KrimLibrary.Core
+namespace KrimLibrary.Core.Objects
 {
-    public class Tile : ICollision
+    public abstract class Tile : ICollision
     {
-        private Point _position;
+        protected Point _position;
         public Point Position { get => _position; }
         public int X { get => _position.X; set => _position.X = value; }
         public int Y { get => _position.Y; set => _position.Y = value; }
@@ -15,14 +15,21 @@ namespace KrimLibrary.Core
         private CollisionType _collisionType;
         public CollisionType CollisionType { get => _collisionType; }
 
-        public object Owner { get; }
+        private object _owner;
+        public object Owner { get => _owner; }
 
-        public Tile(TileType tileType)
+        protected void Init(int x, int y, TileType tileType)
         {
+            _owner = this;
+            X = x;
+            Y = y;
+            TileType = tileType;
+            SetCollision(tileType);
             CollisionManager.AddCollision(this);
+        }
 
-            Owner = this;
-
+        protected void SetCollision(TileType tileType)
+        {
             switch (tileType)
             {
                 case TileType.Floor:
@@ -30,6 +37,9 @@ namespace KrimLibrary.Core
                     break;
                 case TileType.Wall:
                     _collisionType = CollisionType.Impassable;
+                    break;
+                case TileType.Box:
+                    _collisionType = CollisionType.Relocatable;
                     break;
                 case TileType.Exit:
                     _collisionType = CollisionType.Passable;
@@ -40,19 +50,6 @@ namespace KrimLibrary.Core
             }
         }
 
-
-        public Tile(int x, int y, TileType tileType) : this(tileType)
-        {
-            SetTile(x, y, tileType);
-        }
-
-        public void SetTile(int x, int y, TileType tileType)
-        {
-            X = x;
-            Y = y;
-            TileType = tileType;
-        }
-
         public void OnCollision(Collision collision)
         {
 
@@ -60,7 +57,7 @@ namespace KrimLibrary.Core
 
         public void NearCollision(List<Collision> collisions)
         {
-            
+
         }
     }
 }

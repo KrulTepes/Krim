@@ -137,6 +137,8 @@ namespace KrimWPF.ViewModels
                 return;
             }
 
+            SwapTiles.tiles = game.Level.Tiles;
+
             FieldRows = game.Level.Rows;
             FieldColumns = game.Level.Columns;
 

@@ -1,4 +1,4 @@
-﻿namespace KrimLibrary.Core
+﻿namespace KrimLibrary.Core.Objects
 {
     public enum TileType
     {
@@ -6,6 +6,7 @@
         Floor,
         Wall,
         Exit,
+        Box,
         UNDEFIND
     }
 }

@@ -1,4 +1,4 @@
-﻿using KrimLibrary.Core;
+﻿using KrimLibrary.Core.Objects;
 using KrimLibrary.Resource;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -67,9 +67,19 @@ namespace KrimWPF.Models
                 OldPositionPlayer = new System.Drawing.Point(playerPosX, playerPosY);
             }
 
-            oldTileTypesList = tiles.Select(tile => tile.TileType).ToList();
+            oldTileTypesList = CopyArray(tiles.Select(tile => tile.TileType).ToList());
 
             return collection;
+        }
+
+        private List<TileType> CopyArray(List<TileType> from)
+        {
+            List<TileType> to = new List<TileType>();
+            for (int i = 0; i < from.Count; i++)
+            {
+                to.Add(from[i]);
+            }
+            return to;
         }
     }
 }

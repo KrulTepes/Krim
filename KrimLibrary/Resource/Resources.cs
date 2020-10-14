@@ -1,4 +1,4 @@
-﻿using KrimLibrary.Core;
+﻿using KrimLibrary.Core.Objects;
 using System;
 using System.Collections.Generic;
 using System.IO;
