@@ -1,6 +1,0 @@
-F:\Projects\Krim\KrimLibrary\bin\Debug\KrimLibrary.dll
-F:\Projects\Krim\KrimLibrary\bin\Debug\KrimLibrary.pdb
-F:\Projects\Krim\KrimLibrary\obj\Debug\KrimLibrary.csproj.CoreCompileInputs.cache
-F:\Projects\Krim\KrimLibrary\obj\Debug\KrimLibrary.dll
-F:\Projects\Krim\KrimLibrary\obj\Debug\KrimLibrary.pdb
-F:\Projects\Krim\KrimLibrary\obj\Debug\KrimLibrary.csprojAssemblyReference.cache

@@ -19,7 +19,7 @@ namespace KrimLibrary.Core.Entities
             this.position = position;
         }
 
-        public void Move(MoveType moveType)
+        public bool Move(MoveType moveType)
         {
             List<Collision> nearCollisions = CollisionManager.GetNearCollisions(this);
 
@@ -57,7 +57,7 @@ namespace KrimLibrary.Core.Entities
                         tile.Position.Y == tempPosition.Y)
                     {
                         if (tile.CollisionType == CollisionType.Impassable) 
-                            return;
+                            return false;
 
                         break;
                     }
@@ -65,6 +65,7 @@ namespace KrimLibrary.Core.Entities
             }
 
             position = tempPosition;
+            return true;
         }
 
         public void SetPosition(Point newPosition)

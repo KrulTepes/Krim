@@ -47,7 +47,8 @@ namespace KrimLibrary.Core
 
         public void Update(MoveType moveType)
         {
-            Player.Move(moveType);
+            if (!Player.Move(moveType)) return;
+
             CollisionManager.CallingAllHandlers();
             _countMove++;
 

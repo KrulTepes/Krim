@@ -177,9 +177,9 @@ namespace KrimWPF.ViewModels
 
         public void Update()
         {
+            CountMoves = game.CountMove;
             TilesCollection = imageManager.UpdateCollection(TilesCollection, game.Level.Tiles, game.Player.Position.X, game.Player.Position.Y, game.Level.Columns);
-            if (game.GameState == GameState.Win)
-            {
+            if (game.GameState == GameState.Win) {
                 MessageBox.Show("WIN!!!!");
             }
         }
